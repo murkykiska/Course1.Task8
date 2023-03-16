@@ -45,12 +45,12 @@ namespace Task8
 
             while (true)
             {
-                Console.WriteLine("Продолжайте итеративный ввод номера телефонов и ФИО их владельцев (первым идет ввод номера телефона)");
+                Console.WriteLine("\nПродолжайте итеративный ввод номера телефонов и ФИО их владельцев (первым идет ввод номера телефона)");
                 Console.WriteLine("1 - для вывода всего содержимого в консоль");
                 Console.WriteLine("2 - для поиска владельца по номеру телефона");
-                Console.Write("Введите номер телефона или номер режима: ");
+                Console.WriteLine("Введите номер телефона или номер режима: ");
 
-                string mode = Console.Read().ToString();
+                string mode = Console.ReadLine();
 
                 if (long.TryParse(mode, out key))
                 {
@@ -60,17 +60,17 @@ namespace Task8
                             PrintDictionary(Persons);
                             break;
                         case "2":
-                            FindInDictionary(Persons, key);
+                            Console.WriteLine("Введите номер телефона:");
+                            if (long.TryParse(Console.ReadLine(), out key))
+                                FindInDictionary(Persons, key);
+                            else
+                                Console.WriteLine("Было введено не число.");
                             break;
                         default:
                             if (Persons.ContainsKey(key))
-                            {
                                 Console.WriteLine("Данный номер телефона уже зарегистрирован в сисеме.");
-                            }
                             else
-                            {
                                 AddNewPerson(ref Persons, key);
-                            }
                             break;
                     }
                 }
